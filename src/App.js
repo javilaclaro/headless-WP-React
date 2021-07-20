@@ -1,50 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "@apollo/react-hooks";
+import Posts from "./components/posts";
 
-fetch('https://juandac.com/wp/graphql', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    query: `
-        {
-          posts {
-            nodes {
-              id
-              title
-              date
-              content
-            }
-          }
-        }
-    `,
-  }),
-})
+const client = new ApolloClient({
+  uri: 'https://juandac.com/wp/graphql',
+});
 
-  .then(res => res.json())
-  .then(res => console.log(res.data)) 
+  const App = () => {
+    return (
+      <ApolloProvider client={client}>
+        <div>
+          <Posts />
+        </div>
+      </ApolloProvider>
+    );
+  };
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Juandac.com
-
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
 export default App;

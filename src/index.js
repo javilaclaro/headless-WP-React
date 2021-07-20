@@ -3,41 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  useQuery,
-  gql
-} from "@apollo/client";
-
-const client = new ApolloClient({
-  uri: 'https://juandac.com/wp/graphql',
-  cache: new InMemoryCache()
-});
-
-
-fetch('https://juandac.com/wp/graphql', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    query: `
-        {
-          posts {
-            nodes {
-              id
-              title
-              date
-            }
-          }
-        }
-    `,
-  }),
-})
-  .then(res => res.json())
-  .then(res => console.log(res.data))
 
 ReactDOM.render(
   <React.StrictMode>
