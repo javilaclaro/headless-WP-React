@@ -8,6 +8,12 @@ const POSTS_QUERY = gql`
         id
         title(format: RENDERED)
         content
+        authorId
+        author {
+          node {
+            firstName
+          }
+        }
       }
     }
   }
@@ -27,6 +33,7 @@ const Posts = () => {
   {posts.map(({ content }) => <div dangerouslySetInnerHTML={{
     __html: content
   }}></div>)}
+  <div>Creado por {posts.map(({authorId}) => <span>{authorId}</span>)}</div>
   </div>;
 };
 
